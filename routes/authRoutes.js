@@ -1,12 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { authenticateUser, googleCallback } = require('../services/authService.js');
-const cors = require('cors');
-
-router.use(cors({
-    origin: 'http://127.0.0.1:3000',
-    credentials: true
-}));
 
 // Middleware to handle CORS preflight requests
 router.options('/authenticate-user', (req, res) => {
