@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/akaskverma2000/fullstack-intern-assignment#readme",
   "dependencies": {
+    "@tensorflow/tfjs": "^4.20.0",
     "axios": "^1.7.2",
     "body-parser": "^1.20.2",
     "compromise": "^14.13.0",
@@ -26,6 +27,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "googleapis": "^140.0.0",
-    "n-gram": "^2.0.2"
+    "markovchain": "^1.0.2",
+    "n-gram": "^2.0.2",
+    "openai": "^4.51.0"
   }
 }

@@ -20,11 +20,11 @@ const cors = require("cors");
 
 const corsOptions = {
     origin: '*',
-    credentials: true,            //access-control-allow-credentials:true
+    credentials: true,
     optionSuccessStatus: 200,
 }
 
-app.use(cors(corsOptions)) // Use this after the variable declaration
+app.use(cors(corsOptions))
 
 // Create an OAuth2 client
 const oAuth2Client = new OAuth2Client(
@@ -124,21 +124,36 @@ app.post('/generate-post', async (req, res) => {
         console.error('Chat GPT Failed:', error.response ? error.response.data : error.message);
 
         try {
-            const { bigram } = await import('n-gram');
-            const tokens = bigram(prompt.toLowerCase());
-            let generatedText = '';
-            for (let i = 0; i < tokens.length; i++) {
-                const nextWord = tokens[i + 1] ? tokens[i + 1][0] : '';
-                const sentence = `${tokens[i][0]} ${nextWord}`;
-                generatedText += nlp(sentence).toTitleCase().out('text') + ' ';
-            }
+            const axios = require('axios');
+
+            const url = 'https://api.textcortex.com/v1/texts/social-media-posts';
+            const headers = {
+                'Authorization': `Bearer ${process.env.TEXTCORTEX_API_KEY}`,
+                'Content-Type': 'application/json'
+            };
+            const data = {
+                context: prompt,
+                formality: 'prefer_more',
+                keywords: [prompt],
+                max_tokens: 2048,
+                mode: 'twitter',
+                model: 'claude-haiku',
+                n: 1,
+                source_lang: 'en',
+                target_lang: 'en',
+                temperature: null
+            };
+
+
+            const response = await axios.post(url, data, { headers })
 
             const timestamp = new Date().toISOString();
+            const summary = response.data.data.outputs[0].text
 
             // Save to Google Sheets
             await axios.post(`https://sheets.googleapis.com/v4/spreadsheets/${process.env.GOOGLE_SHEET_ID}/values/Sheet1:append?valueInputOption=RAW`, {
                 range: 'Sheet1',
-                values: [[timestamp, prompt, generatedText.trim()]]
+                values: [[timestamp, prompt, summary]]
             }, {
                 headers: {
                     'Authorization': `Bearer ${req.cookies.accessToken}`,
@@ -146,7 +161,8 @@ app.post('/generate-post', async (req, res) => {
                 }
             });
 
-            res.json({ post: generatedText.trim() });
+            res.json({ post: summary });
+
 
         } catch (error) {
             console.error('Error generating completion:', error.response ? error.response.data : error.message);

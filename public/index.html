@@ -7,6 +7,8 @@
     <title>Social Media Post Generator</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://apis.google.com/js/api.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 
 <body>
@@ -14,9 +16,59 @@
         <h1>Social Media Post Generator</h1>
         <input type="text" id="prompt" placeholder="Enter your prompt">
         <button onclick="generatePost()">Generate Post</button>
-        <div id="posts"></div>
+
+        <!-- Search and sort options -->
+        <div>
+            <label for="search">Search:</label>
+            <input type="text" id="search" placeholder="Search...">
+        </div>
+        <div>
+            <label for="sort">Sort by:</label>
+            <select id="sort">
+                <option value="0">Post Content</option>
+                <option value="1">Author</option>
+                <option value="2">Date</option>
+            </select>
+        </div>
+
+        <div class="table-container">
+            <table id="posts">
+                <thead>
+                    <tr>
+                        <th>Post Content</th>
+                        <th>Author</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Posts will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
     </div>
-    <script src="script.js"></script>
+    <div class="chat-option">
+        <!-- Chat option content here -->
+    </div>
+
+
+
+    <script type="module" src="js/utils/utils.js"></script>
+    <script type="module" src="js/post/generatePost.js"></script>
+    <script type="module" src="js/post/fetchPosts.js"></script>
+
+    <script type="module">
+        import { generatePost } from './js/post/generatePost.js';
+        import { fetchPosts, filterPosts, sortPosts } from './js/post/fetchPosts.js';
+
+        // Event listener for search input
+        document.getElementById('search').addEventListener('input', function () {
+            filterPosts(this.value);
+        });
+
+        // Initial fetch of posts
+        fetchPosts();
+    </script>
+
 </body>
 
 </html>
