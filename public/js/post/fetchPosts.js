@@ -5,7 +5,10 @@ let postsData = []; // Variable to store the original posts data
 // Function to fetch and display posts in a table
 export async function fetchPosts() {
     try {
-        const response = await fetch('/fetch-posts');
+        const response = await fetch('/posts/fetch-posts');
+        if (!response.ok) {
+            throw new Error(`Failed to fetch posts. Status: ${response.status}`);
+        }
         const data = await response.json();
         if (data.values) {
             postsData = data.values; // Store original posts data
@@ -27,7 +30,7 @@ export async function fetchPosts() {
         console.error('Error fetching posts:', error);
         // Show error toast
         Toastify({
-            text: "Error fetching posts",
+            text: "Failed to fetch posts. Please try again later.",
             duration: 3000,
             close: true,
             gravity: "top",

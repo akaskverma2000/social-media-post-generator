@@ -15,7 +15,7 @@
     <div class="container">
         <h1>Social Media Post Generator</h1>
         <input type="text" id="prompt" placeholder="Enter your prompt">
-        <button onclick="generatePost()">Generate Post</button>
+        <button id="generateBtn">Generate Post</button>
 
         <!-- Search and sort options -->
         <div>
@@ -26,8 +26,8 @@
             <label for="sort">Sort by:</label>
             <select id="sort">
                 <option value="0">Post Content</option>
-                <option value="1">Author</option>
-                <option value="2">Date</option>
+                <option value="1">Prompt</option>
+                <option value="2">Response</option>
             </select>
         </div>
 
@@ -59,6 +59,8 @@
     <script type="module">
         import { generatePost } from './js/post/generatePost.js';
         import { fetchPosts, filterPosts, sortPosts } from './js/post/fetchPosts.js';
+
+        document.getElementById('generateBtn').addEventListener('click', generatePost);
 
         // Event listener for search input
         document.getElementById('search').addEventListener('input', function () {

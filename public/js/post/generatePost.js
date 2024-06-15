@@ -4,7 +4,7 @@ import { fetchPosts } from './fetchPosts.js';
 export async function generatePost() {
     const prompt = document.getElementById('prompt').value;
     try {
-        const response = await fetch('/generate-post', {
+        const response = await fetch('/posts/generate-post', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -13,14 +13,11 @@ export async function generatePost() {
         });
         const data = await response.json();
         if (data.post) {
-            const postElement = document.createElement('div');
-            postElement.textContent = `Post: ${data.post}`;
-            document.getElementById('posts').appendChild(postElement);
             fetchPosts();  // Refresh the list of posts
 
             // Show success toast
             Toastify({
-                text: "Post generated successfully!",
+                text: "Your post has been successfully generated!",
                 duration: 3000,
                 close: true,
                 gravity: "top", // `top` or `bottom`
@@ -31,7 +28,7 @@ export async function generatePost() {
         } else {
             // Show error toast
             Toastify({
-                text: "Failed to generate post",
+                text: "Oops! Something went wrong while generating your post. Please try again later.",
                 duration: 3000,
                 close: true,
                 gravity: "top",
@@ -44,7 +41,7 @@ export async function generatePost() {
         console.error('Error generating post:', error);
         // Show error toast
         Toastify({
-            text: "Error generating post",
+            text: "Oops! Something went wrong while generating your post. Please try again later.",
             duration: 3000,
             close: true,
             gravity: "top",
