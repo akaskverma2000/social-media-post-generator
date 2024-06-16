@@ -20,6 +20,10 @@ const googleCallback = async (req, res) => {
         const { tokens } = await oAuth2Client.getToken(code);
         const accessToken = tokens.access_token;
 
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Credentials', 'true');
+        res.header('Access-Control-Allow-Methods', 'GET');
+
         res.cookie('accessToken', accessToken, { httpOnly: true });
         res.send('Authorization successful. You can now use the access token.');
     } catch (error) {
@@ -27,6 +31,7 @@ const googleCallback = async (req, res) => {
         res.status(500).json({ error: 'Failed to get OAuth2 tokens' });
     }
 };
+
 
 const googleAuth = async (req, res) => {
     try {
