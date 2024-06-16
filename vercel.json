@@ -12,8 +12,16 @@
     ],
     "routes": [
         {
-            "src": "/(.*)",
-            "dest": "/"
+            "src": "/auth/(.*)",
+            "dest": "/api/authRoutes.js"
+        },
+        {
+            "src": "/posts/(.*)",
+            "dest": "/api/postRoutes.js"
+        },
+        {
+            "src": "/",
+            "dest": "/public/index.html"
         },
         {
             "src": "/css/(.*)",

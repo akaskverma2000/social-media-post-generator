@@ -24,12 +24,6 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-app.use('/css', (req, res, next) => {
-    res.setHeader('Content-Type', 'text/css');
-    next();
-});
-
-
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
