@@ -23,8 +23,8 @@
             "dest": "/routes/postRoutes.js"
         },
         {
-            "src": "/home",
-            "dest": "/app.js"
+            "src": "/posts/fetch-posts",
+            "dest": "/routes/postRoutes.js"
         },
         {
             "src": "/",
