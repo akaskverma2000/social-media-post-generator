@@ -4,17 +4,9 @@
         {
             "src": "./index.js",
             "use": "@vercel/node"
-        },
-        {
-            "src": "public/**/*",
-            "use": "@vercel/static"
         }
     ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "/"
-        },
         {
             "src": "/auth/(.*)",
             "dest": "/api/authRoutes.js"
@@ -24,16 +16,16 @@
             "dest": "/api/postRoutes.js"
         },
         {
-            "src": "/",
-            "dest": "/public/index.html"
-        },
-        {
             "src": "/css/(.*)",
             "dest": "/public/css/$1"
         },
         {
             "src": "/js/(.*)",
             "dest": "/public/js/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/public/index.html"
         }
     ]
 }
