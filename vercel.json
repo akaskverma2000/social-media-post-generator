@@ -28,11 +28,7 @@
         },
         {
             "src": "/(.*)",
-            "dest": "/app.js"
-        },
-        {
-            "src": "/",
-            "dest": "/public/index.html"
+            "dest": "/public/:1"
         }
     ]
 }
