@@ -4,8 +4,8 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const corsOptions = require('./middlewares/cors.js');
-const authRoutes = require('./routes/authRoutes.js');
-const postRoutes = require('./routes/postRoutes.js');
+const authRoutes = require('./api/authRoutes.js');
+const postRoutes = require('./api/postRoutes.js');
 
 dotenv.config();
 const app = express();
@@ -18,10 +18,6 @@ app.use(cors(corsOptions));
 
 app.use('/auth', authRoutes);
 app.use('/posts', postRoutes);
-
-app.get('/home', (req, res) => {
-    res.send('Hello, World!');
-});
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
