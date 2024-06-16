@@ -16,11 +16,11 @@
         },
         {
             "src": "/auth/(.*)",
-            "dest": "/authRoutes.js"
+            "dest": "/routes/authRoutes.js"
         },
         {
             "src": "/posts/(.*)",
-            "dest": "/postRoutes.js"
+            "dest": "/routes/postRoutes.js"
         },
         {
             "src": "/home",
@@ -29,6 +29,10 @@
         {
             "src": "/(.*)",
             "dest": "/app.js"
+        },
+        {
+            "src": "/",
+            "dest": "/public/index.html"
         }
     ]
 }
