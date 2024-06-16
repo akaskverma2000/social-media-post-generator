@@ -26,6 +26,7 @@ const googleCallback = async (req, res) => {
 
         res.cookie('accessToken', accessToken, { httpOnly: true });
         res.send('Authorization successful. You can now use the access token.');
+        res.redirect('/');
     } catch (error) {
         console.error('Failed to get OAuth2 tokens:', error);
         res.status(500).json({ error: 'Failed to get OAuth2 tokens' });
