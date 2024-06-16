@@ -19,6 +19,11 @@ app.use(cors(corsOptions));
 app.use('/auth', authRoutes);
 app.use('/posts', postRoutes);
 
+// Route for serving the index.html file for the '/' route
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/public/index.html');
+});
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
