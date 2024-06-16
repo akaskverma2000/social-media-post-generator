@@ -19,6 +19,10 @@ app.use(cors(corsOptions));
 app.use('/auth', authRoutes);
 app.use('/posts', postRoutes);
 
+app.get('/home', (req, res) => {
+    res.send('Hello, World!');
+});
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
