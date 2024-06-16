@@ -13,5 +13,6 @@ router.options('/authenticate-user', (req, res) => {
 
 router.get('/authenticate-user', authenticateUser);
 router.get('/google/callback', googleCallback);
+router.get('/auth/google', googleAuth);
 
 module.exports = router;
