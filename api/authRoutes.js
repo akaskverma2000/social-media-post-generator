@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { authenticateUser, googleCallback } = require('../services/authService.js');
+const { authenticateUser, googleCallback, googleAuth } = require('../services/authService.js');
 
 // Middleware to handle CORS preflight requests
 router.options('/authenticate-user', (req, res) => {

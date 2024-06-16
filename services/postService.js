@@ -90,7 +90,7 @@ const fetchPosts = async (req, res) => {
 
     if (!accessToken) {
         // Redirect user to authenticate if token is not present
-        res.redirect('/auth/authenticate-user'); // Assuming 'res' is the response object
+        res.redirect('/auth/auth/google'); // Assuming 'res' is the response object
         return;
     }
 

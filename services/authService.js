@@ -26,19 +26,19 @@ const googleCallback = async (req, res) => {
         console.error('Failed to get OAuth2 tokens:', error);
         res.status(500).json({ error: 'Failed to get OAuth2 tokens' });
     }
+};
 
-    const googleAuth = async (req, res) => {
-        try {
-            const authUrl = oAuth2Client.generateAuthUrl({
-                access_type: 'offline',
-                scope: ['https://www.googleapis.com/auth/spreadsheets'],
-            });
-            res.redirect(authUrl);
-        } catch (error) {
-            console.error('Failed to generate Google auth URL:', error);
-            res.status(500).json({ error: 'Failed to generate Google auth URL' });
-        }
-    };
+const googleAuth = async (req, res) => {
+    try {
+        const authUrl = oAuth2Client.generateAuthUrl({
+            access_type: 'offline',
+            scope: ['https://www.googleapis.com/auth/spreadsheets'],
+        });
+        res.redirect(authUrl);
+    } catch (error) {
+        console.error('Failed to generate Google auth URL:', error);
+        res.status(500).json({ error: 'Failed to generate Google auth URL' });
+    }
 };
 
 module.exports = {
