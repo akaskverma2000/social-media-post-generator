@@ -12,11 +12,22 @@
     ],
     "routes": [
         {
-            "src": "/(.*)",
-            "dest": "/app.js"
+            "handle": "filesystem"
+        },
+        {
+            "src": "/auth/(.*)",
+            "dest": "/authRoutes.js"
+        },
+        {
+            "src": "/posts/(.*)",
+            "dest": "/postRoutes.js"
         },
         {
             "src": "/home",
+            "dest": "/app.js"
+        },
+        {
+            "src": "/(.*)",
             "dest": "/app.js"
         }
     ]
