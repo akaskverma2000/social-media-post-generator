@@ -90,7 +90,8 @@ const fetchPosts = async (req, res) => {
 
     if (!accessToken) {
         // Redirect user to authenticate if token is not present
-        res.redirect('/auth/authenticate-user'); // Assuming 'res' is the response object
+        // Send JSON response indicating authentication is required
+        res.status(401).json({ requiresAuthentication: true });
         return;
     }
 
@@ -108,7 +109,7 @@ const fetchPosts = async (req, res) => {
 
     if (tokenInfo.exp && currentTime >= tokenInfo.exp) {
         // Token has expired, redirect user to authenticate
-        res.redirect('/auth/authenticate-user'); // Assuming 'res' is the response object
+        res.status(401).json({ requiresAuthentication: true });
         return;
     }
 

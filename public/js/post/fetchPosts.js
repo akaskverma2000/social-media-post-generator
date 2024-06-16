@@ -6,6 +6,11 @@ let postsData = []; // Variable to store the original posts data
 export async function fetchPosts() {
     try {
         const response = await fetch('/posts/fetch-posts');
+        if (response.status === 401) {
+            // Authentication is required, open authentication URL in a new tab
+            window.open("/auth/authenticate-user", "_blank");
+            return;
+        }
         if (!response.ok) {
             throw new Error(`Failed to fetch posts. Status: ${response.status}`);
         }
